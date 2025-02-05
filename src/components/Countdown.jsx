@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
+import Counter from "./Counter";
+import Input from "./Input";
 
 export default function Countdown() {
     const [counter, setCounter] = useState(10);
@@ -13,11 +15,12 @@ export default function Countdown() {
     }
     function handleReset() {
         setCounter(10);
+        setCountStart(false);
     }
 
     useEffect(() => {
         let intervalID = null;
-        if (countStart) {
+        if (countStart && counter > 0) {
             intervalID = setInterval(() => {
                 setCounter(counter - 1);
             }, 1000);
@@ -31,9 +34,7 @@ export default function Countdown() {
             <h1 className="text-4xl font-semibold text-gray-300">
                 Countdown
             </h1>
-            <div className="">
-                <p className="text-gray-200 text-xl">{counter} seconds</p>
-            </div>
+            <Counter counter={counter} />
             <div className="flex gap-x-2">
                 <Button
                     text={"Start"}
@@ -45,7 +46,7 @@ export default function Countdown() {
                     text={"Pause"}
                     color={"bg-amber-500"}
                     handleClick={handlePause}
-                    isDisabled={!countStart}
+                    isDisabled={!countStart || !counter}
                 />
                 <Button
                     text={"Reset"}
