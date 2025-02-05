@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
 @theme{
-    --color-epic: #0f0f0f
+    --color-epic-50: #0f0f0f;
+    --color-epic-100: #060606;
 }
