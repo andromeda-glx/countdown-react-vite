@@ -63,6 +63,7 @@ export default function Countdown({ initialValue, handleActive }) {
                     text={"Reset"}
                     color={"bg-red-500"}
                     handleClick={handleReset}
+                    isDisabled={countStart}
                 />
             </div>
         </div>
