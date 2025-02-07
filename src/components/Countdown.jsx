@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./Button";
-import Counter from "./Counter";
-import Input from "./Input";
 
-export default function Countdown() {
-    const [counter, setCounter] = useState(10);
+// eslint-disable-next-line react/prop-types
+export default function Countdown({ initialValue, handleActive }) {
+    const [counter, setCounter] = useState(0);
     const [countStart, setCountStart] = useState(false);
 
     function handleStart() {
         setCountStart(true);
+        handleActive(true);
     }
     function handlePause() {
         setCountStart(false);
+        handleActive(true);
     }
     function handleReset() {
-        setCounter(10);
-        setCountStart(false);
+        handleActive(false);
+        setCounter(initialValue);
     }
+
+    useEffect(() => {
+        setCounter(initialValue);
+    }, [initialValue]);
 
     useEffect(() => {
         let intervalID = null;
@@ -25,8 +30,12 @@ export default function Countdown() {
                 setCounter(counter - 1);
             }, 1000);
         }
+        else if (counter === 0){
+            setCountStart(false);
+        }
 
         return () => clearInterval(intervalID);
+
     }, [counter, countStart]);
 
     return (
@@ -34,19 +43,21 @@ export default function Countdown() {
             <h1 className="text-4xl font-semibold text-gray-300">
                 Countdown
             </h1>
-            <Counter counter={counter} />
+            <div className="">
+                <p className="text-gray-200 text-xl">{counter} seconds</p>
+            </div>
             <div className="flex gap-x-2">
                 <Button
                     text={"Start"}
                     color={"bg-blue-500"}
                     handleClick={handleStart}
-                    isDisabled={countStart}
+                    isDisabled={countStart || counter === 0}
                 />
                 <Button
                     text={"Pause"}
                     color={"bg-amber-500"}
                     handleClick={handlePause}
-                    isDisabled={!countStart || !counter}
+                    isDisabled={!countStart || counter === 0}
                 />
                 <Button
                     text={"Reset"}
