@@ -22,7 +22,7 @@ function App() {
 
     return (
         <main className="bg-epic-50 h-dvh w-dvw flex items-center justify-center flex-col gap-y-5">
-            <div className="bg-gray-500 w-[60%] rounded-2xl p-6">
+            <div className="bg-gray-800 w-[60%] rounded-2xl p-6">
                 <h2 className="text-gray-100 text-xl">Set a time</h2>
                 <div className="flex items-stretch justify-center gap-x-5 w-full">
                     <input

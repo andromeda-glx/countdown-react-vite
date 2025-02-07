@@ -39,7 +39,7 @@ export default function Countdown({ initialValue, handleActive }) {
     }, [counter, countStart]);
 
     return (
-        <div className="w-[60%] bg-epic-100 flex flex-col gap-y-8 items-center py-5 px-10 rounded-2xl">
+        <div className="w-[60%] bg-gray-800 flex flex-col gap-y-8 items-center py-5 px-10 rounded-2xl">
             <h1 className="text-4xl font-semibold text-gray-300">
                 Countdown
             </h1>
